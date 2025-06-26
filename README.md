@@ -1,4 +1,4 @@
-# Uni Münster Typst Thesis Template
+# University of Münster Typst Template
 
 This is an **unofficial** [Typst](https://github.com/typst/typst) template for writing a
 
