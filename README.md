@@ -13,4 +13,4 @@ I'll try to align it with the *LaTeX template* of the workgroup [Autonomous Inte
 
 ## Acknowledgements
 
-The structure of this repo is inspired by the [HAW Hamburg Typst Template](https://github.com/LasseRosenow/HAW-Hamburg-Typst-Template) by Lasse Rosenow.
+This repo is inspired by the [HAW Hamburg Typst Template](https://github.com/LasseRosenow/HAW-Hamburg-Typst-Template) by Lasse Rosenow.
