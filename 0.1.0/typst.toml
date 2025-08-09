@@ -1,0 +1,12 @@
+[package]
+name = "uni-ms-tt"
+version = "0.1.0"
+compiler = "0.13.1"
+authors = ["Florian Bohlken"]
+license = "MIT"
+repository = "https://github.com/Flibbo/uni-ms-tt"
+description = "Unofficial template for writing a report at the University of Münster department of Computer Science."
+categories = ["report"]
+
+entrypoint = "src/main.typ"
+
