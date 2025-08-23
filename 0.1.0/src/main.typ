@@ -9,13 +9,22 @@
   advisor: none,
   doc
 ) = {
-  // Document settings
+  // initial document settings
   set page(
     paper: "a4",
     margin: (left: 4cm, rest: 2cm),
   )
   
   set heading(numbering: "1.1.1")
+  
+  // grey line in between the numbering and the heading
+  show heading: it => [
+    #if (counter(heading).get().at(0) > 0) {
+      counter(heading).display()
+      text(silver)[ | ]
+    }
+    #text(it.body)
+  ]
   
   set text(
     font: "New Computer Modern",
@@ -47,7 +56,7 @@
     pagebreak()   
   }
 
-  // Document settings
+  // document settings
   set page(
     margin: (left: 4cm, rest: 2cm),
     header: align(
@@ -61,6 +70,7 @@
   set par(
     justify: true,
     // leading: 1.5em,
+    // spacing: 1.5em
   )
 
   // add space after headings
@@ -75,6 +85,8 @@
     pagebreak()
     set page(numbering: "1",)
   }
+
+  counter(page).update(1)
 
   doc
 }
