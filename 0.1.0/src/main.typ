@@ -1,12 +1,13 @@
 #let report(
   draw-title-page: false,
   draw-outline: false,
-  title: none,
-  type: "Ausarbeitung",
-  author: none,
+  title: [Title \ optionally multi-rowed],
+  type: "Report",
+  author: "Magges Mustermensch",
   email: none,
   matric: none,
   advisor: none,
+  lang: "en",
   doc
 ) = {
   // initial document settings
@@ -28,7 +29,7 @@
   
   set text(
     font: "New Computer Modern",
-    lang: "de",
+    lang: lang,
     size: 12pt,
   )
 
@@ -40,18 +41,41 @@
     )
     image("Logo_Universität_Münster.svg")
     line(start: (0%, 0%), end: (8.5in, 0%), stroke: (thickness: 2pt))
-    align(horizon + left)[
-      #text(size: 24pt, title)\
-      #v(1em)
-      #text(size: 14pt, type)
-      #v(2em)
-      #text(size: 14pt, [#author])\
-      #text(size: 14pt, [#link(email)])\
-      #text(size: 14pt, [Matrikelnummer: #matric])\
-      #if not advisor == none {
-        text(size: 14pt, [Betreuer:in: #advisor])
+    align(horizon + left)[#{
+      set text(size: 14pt)  // font size for the title page
+      text(size: 24pt, title)
+      linebreak()
+      v(1em)
+      text(type)
+      v(2em)
+      text(emph(author))
+      linebreak()
+      if email != none {
+        text(emph(link(email)))
+        linebreak()
       }
-    ]
+      if matric != none {
+        text([
+          #if (lang == "de") {
+            "Matrikelnummer:"
+          } else {
+            "Student ID:"  
+          }
+          #emph(matric)
+        ])
+        linebreak()
+      }
+      if advisor != none {
+        text([
+          #if (lang == "de") {
+            "Betreuer:in:"
+          } else {
+            "Supervisor:"  
+          }
+          #emph(advisor)
+        ])
+      }
+    }]
     align(bottom + left)[#datetime.today().display()]
     pagebreak()   
   }
@@ -69,8 +93,7 @@
   // double spacing paragraphs
   set par(
     justify: true,
-    // leading: 1.5em,
-    // spacing: 1.5em
+    // leading: .65em,  // standard; 1.5em seems too much
   )
 
   // add space after headings
