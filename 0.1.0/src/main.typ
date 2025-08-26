@@ -1,6 +1,7 @@
 #let report(
   draw-title-page: false,
   draw-outline: false,
+  hide-header: false,
   title: [Title \ optionally multi-rowed],
   type: "Report",
   author: "Magges Mustermensch",
@@ -10,15 +11,17 @@
   lang: "en",
   doc
 ) = {
-  // initial document settings
+
+  // Initial document settings
+  let margin-main = (left: 4cm, rest: 2cm)
   set page(
     paper: "a4",
-    margin: (left: 4cm, rest: 2cm),
+    margin: margin-main,
   )
   
   set heading(numbering: "1.1.1")
   
-  // grey line in between the numbering and the heading
+  // Grey line in between the numbering and the heading
   show heading: it => [
     #if (counter(heading).get().at(0) > 0) {
       counter(heading).display()
@@ -42,7 +45,7 @@
     image("Logo_Universität_Münster.svg")
     line(start: (0%, 0%), end: (8.5in, 0%), stroke: (thickness: 2pt))
     align(horizon + left)[#{
-      set text(size: 14pt)  // font size for the title page
+      set text(size: 14pt)  // Font size for the title page
       text(size: 24pt, title)
       linebreak()
       v(1em)
@@ -80,23 +83,26 @@
     pagebreak()   
   }
 
-  // document settings
+  // Document settings
   set page(
-    margin: (left: 4cm, rest: 2cm),
-    header: align(
-      horizon,
-      text(.5em)[#title #h(1fr) #author]
-    ),
+    margin: margin-main,
     numbering: "1",
+    header: if not hide-header {
+      // Header
+      align(
+        horizon,
+        text(.5em)[#title #h(1fr) #author],
+      )
+    } else { none },
   )
 
-  // double spacing paragraphs
+  // Double spacing paragraphs
   set par(
     justify: true,
     // leading: .65em,  // standard; 1.5em seems too much
   )
 
-  // add space after headings
+  // Add space after headings
   show heading: set block(
     below: 1em,
   )
@@ -109,6 +115,7 @@
     set page(numbering: "1",)
   }
 
+  // Start regular page counter with content
   counter(page).update(1)
 
   doc
