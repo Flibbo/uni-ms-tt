@@ -54,7 +54,7 @@
       text(emph(author))
       linebreak()
       if email != none {
-        text(emph(link(email)))
+        text(emph(link("mailto:"+email)))
         linebreak()
       }
       if matric != none {

@@ -41,12 +41,13 @@ After the import, add the `show` block:
 
 ```typst
 #show: report.with(
-  title: "This is the title of your document and will be displayed large",
-  author: "This should be you",
   draw-title-page: true,
   draw-outline: true,
+  // hide-header: true,
+  title: "This is the title of your document and will be displayed large",
+  author: "This should be you",
   type: [Exposé in the workgroup of \ AIS (Autonomous Intelligent Systems)],
-  email: "mailto:yourmail@uni-muenster.de",
+  email: "yourmail@uni-muenster.de",
   matric: "123456",
   advisor: "Prof. Dr. Malte Schilling",
   // lang: "de",
