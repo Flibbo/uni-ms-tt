@@ -3,7 +3,7 @@
 #let report(
   draw-title-page: false,
   draw-outline: false,
-  hide-header: false,
+  draw-header: true,
   title: [Title \ optionally multi-rowed],
   type: "Report",
   author: "Magges Mustermensch",
@@ -16,7 +16,7 @@
   show: document_setup.with(
     draw-title-page: draw-title-page,
     draw-outline: draw-outline,
-    hide-header: hide-header,
+    draw-header: draw-header,
     title: title,
     type: type,
     author: author,
@@ -24,7 +24,6 @@
     matric: matric,
     advisor: advisor,
     lang: lang,
-    doc,
   )
 
   doc

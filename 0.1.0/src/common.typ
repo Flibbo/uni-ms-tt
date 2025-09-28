@@ -5,7 +5,7 @@
 #let document_setup(
   draw-title-page: false,
   draw-outline: false,
-  hide-header: false,
+  draw-header: false,
   title: [Title \ optionally multi-rowed],
   type: "Document",
   author: "Magges Mustermensch",
@@ -91,7 +91,7 @@
   set page(
     margin: margin-main,
     numbering: "1",
-    header: if not hide-header {
+    header: if draw-header {
       // Header
       align(
         horizon,
