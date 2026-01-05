@@ -1,4 +1,3 @@
-#import "report.typ": report
-#import "bachelors-thesis.typ": bachelors-thesis
-#import "masters-thesis.typ": masters-thesis
+#import "expose.typ": expose
+#import "theses.typ": bachelor, master
 #import "common.typ": hline

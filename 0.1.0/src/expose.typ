@@ -1,11 +1,11 @@
 #import "common.typ": document_setup
 
-#let masters-thesis(
-  draw-title-page: true,
-  draw-outline: true,
-  draw-header: false,
+#let expose(
+  draw-title-page: false,
+  draw-outline: false,
+  draw-header: true,
   title: [Title \ optionally multi-rowed],
-  type: [#smallcaps[Master's Thesis] \ in partial fulfilment of the requirements for the degree of \ #smallcaps[Master of Science]],
+  type: "Report",
   author: "Magges Mustermensch",
   email: none,
   matric: none,
