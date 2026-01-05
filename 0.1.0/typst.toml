@@ -1,12 +1,12 @@
 [package]
-name = "uni-ms-tt"
+name = "uni-ms-thesis"
 version = "0.1.0"
-compiler = "0.13.1"
-authors = ["Florian Bohlken"]
-license = "MIT"
-repository = "https://github.com/Flibbo/uni-ms-tt"
-description = "Unofficial template for writing a report at the University of Münster department of Computer Science."
-categories = ["report"]
-
 entrypoint = "src/main.typ"
 
+authors = ["Florian Bohlken"]
+license = "MIT"
+description = "Unofficial. Expose, bachelor's thesis and master's thesis at the University of Münster department of Computer Science."
+
+compiler = "0.13.1"
+repository = "https://github.com/Flibbo/uni-ms-tt"
+categories = ["report", "thesis"]
