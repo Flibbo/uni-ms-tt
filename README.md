@@ -1,11 +1,10 @@
-# University of Münster Typst Template
+# University of Münster Typst Thesis Template
 
-This is an **unofficial** [Typst](https://github.com/typst/typst) template for writing a
+This is an **unofficial** [Typst](https://github.com/typst/typst) template for writing an
 
-- [ ] lecture / presentation
-- [ ] report
-- [ ] bachelor's thesis
-- [ ] master's thesis
+- **expose**,
+- **bachelor's thesis** *or*
+- **master's thesis**
 
 at the [University of Münster](https://www.uni-muenster.de/).
 
@@ -24,12 +23,18 @@ git clone https://github.com/Flibbo/uni-ms-tt.git
 
 For now there is just a preliminary version of the report to work out the major kinks.
 
+## Required Fonts
+
+The "New Computer Modern Sans" is not included in Typst, so it has to be downloaded from [CTAN](https://www.ctan.org/tex-archive/fonts/newcomputermodern/otf) or just use your preferred search engine for a bundled version.
+
+After putting them in `~/.local/share/fonts` it should display properly.
+
 ## Report
 
-To set up your document to be a **report**, add the following:
+To set up your document to be a **expose**, add the following:
 
 ```typst
-#import "@local/uni-ms-tt:0.1.0": report
+#import "@local/uni-ms-thesis:0.1.0": expose
 ```
 
 ### Configuration
@@ -40,7 +45,7 @@ All are optional and if not set will fall back to standard values or deactivate 
 After the import, add the `show` block:
 
 ```typst
-#show: report.with(
+#show: expose.with(
   draw-title-page: true,
   draw-outline: true,
   // hide-header: true,
@@ -61,7 +66,7 @@ Since I was missing the horizontal bars from _Markdown_ to get a little better o
 To use this you'll have to add the function to your import or make an axclusive one.
 
 ```typst
-#import "@local/uni-ms-tt:0.1.0": hline
+#import "@local/uni-ms-thesis:0.1.0": hline
 ```
 
 ---
