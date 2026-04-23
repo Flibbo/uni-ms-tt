@@ -54,14 +54,16 @@ After the import, add the `show` block:
   type: [Exposé in the workgroup of \ AIS (Autonomous Intelligent Systems)],
   email: "yourmail@uni-muenster.de",
   matric: "123456",
-  advisor: "Prof. Dr. Malte Schilling",
+  supervisor: "John Doe",
+  first-assesor: "Prof. Dr. Malte Schilling",
+  second-assesor: "Prof. Dr. X Y",
   // lang: "de",
 )
 ```
 
 ## Additional Elements
 
-Since I was missing the horizontal bars from _Markdown_ to get a little better overview over the document contents while drafting I added the `#hline` function to replace the `---`.
+Since I was missing the horizontal bars from _Markdown_ to get a little better overview over the document contents while drafting I added the `#hline` function to simulate something in the likes of the `---` from markdown.
 
 To use this you'll have to add the function to your import or make an axclusive one.
 
