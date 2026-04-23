@@ -19,6 +19,8 @@ cd ~/.local/share/typst/packages/local/
 git clone https://github.com/Flibbo/uni-ms-tt.git
 ```
 
+For other operating systems and further information take a look at [the official typst repo](https://github.com/typst/packages#local-packages).
+
 # Using the template
 
 For now there is just a preliminary version of the report to work out the major kinks.
