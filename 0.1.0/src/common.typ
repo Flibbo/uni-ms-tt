@@ -4,6 +4,9 @@
   line(start: (20%, 0%), end: (80%, 0%))
 }
 
+// For accessibility reasons we used the open font "New Computer Modern[ Sans]" included in typst for this document.
+// To be more in line with the official CI of the University of Münster the fonts can be changed to "Meta" for headlines and "Adobe Garamond" for text blocks. See: https://www.jura.uni-muenster.de/de/fakultaet/iv-versorgungseinheit/it-services-und-beratung/kommunikationsvorlagen/
+
 #let title-page(
   title: none,
   type: none,
