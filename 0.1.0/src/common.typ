@@ -1,3 +1,5 @@
+#import "@preview/outrageous:0.4.1"
+
 #let hline = {
   line(start: (20%, 0%), end: (80%, 0%))
 }
@@ -9,51 +11,77 @@
   email: none,
   matric: none,
   lang: none,
-  advisor: none,
+  supervisor: none,
+  first-assesor: none,
+  second-assesor: none,
 ) = {
   // Create the title page
   set page(
-    margin: (top: 3.5cm, rest: 5cm),
+    margin: (top: 3.5cm),
     numbering: none,
   )
-  image("Logo_Universität_Münster.svg")
-  line(start: (0%, 0%), end: (8.5in, 0%), stroke: (thickness: 2pt))
-  align(horizon + left)[#{
-    set text(size: 14pt) // Font size for the title page
-    text(size: 24pt, title)
-    linebreak()
-    v(1em)
+  // Font size for the title page
+  set text(size: 10pt)
+
+  // Centered block
+  align(top + center)[#{
+    image("Logo_Universität_Münster.svg")
+    v(2cm)
+    text(size: 1.73em, weight: "bold", title)
+    v(2cm)
+    show smallcaps: set text(size: 1.2em)
     text(type)
-    v(2em)
-    text(emph(author))
-    linebreak()
-    if email != none {
-      text(emph(link("mailto:" + email)))
-      linebreak()
-    }
+    v(2cm)
+    "Submitted by:"
+    v(1em)
+    text(size: 1.44em, weight: "bold", author)
+    v(1cm)
     if matric != none {
-      text([
-        #if (lang == "de") {
-          "Matrikelnummer:"
-        } else {
-          "Student ID:"
-        }
-        #emph(matric)
-      ])
-      linebreak()
-    }
-    if advisor != none {
-      text([
-        #if (lang == "de") {
-          "Betreuer:in:"
-        } else {
-          "Supervisor:"
-        }
-        #emph(advisor)
-      ])
+      if (lang == "de") {
+        "Matrikelnummer: "
+      } else {
+        "Student ID: "
+      }
+      matric
     }
   }]
-  align(bottom + left)[#datetime.today().display()]
+
+  // Assessment information
+  align(bottom + left)[#{
+    if supervisor != none {
+      if (lang == "de") {
+        "Betreuer:in:"
+      } else {
+        "Supervisor:"
+      }
+      linebreak()
+      text(size: 1.2em, supervisor)
+      v(1em)
+    }
+    if first-assesor != none {
+      if (lang == "de") {
+        "Erstprüfer:in:"
+      } else {
+        "First assessor:"
+      }
+      linebreak()
+      text(size: 1.2em, first-assesor)
+      v(1em)
+    }
+
+    if second-assesor != none {
+        if (lang == "de") {
+          "Zweitprüfer:in:"
+        } else {
+          "Second assessor:"
+        }
+        linebreak()
+        text(size: 1.2em, second-assesor)
+      v(1em)
+    }
+  }
+  Münster, #datetime.today().display("[month repr:long] [day], [year]")
+  ]
   pagebreak()
 }
 
@@ -67,7 +95,9 @@
   author: "Magges Mustermensch",
   email: none,
   matric: none,
-  advisor: none,
+  supervisor: none,
+  first-assesor: none,
+  second-assesor: none,
   lang: "en",
   abstract: none,
   doc,
@@ -87,27 +117,35 @@
     #set text(
       font: "New Computer Modern Sans",
       weight: "black",
-      size: 1.5em,
+      // size: 1em,
     )
+    #v(1.6em)
+    // To avoid numbering at abstract, TOC and supplements
     #if (
-      counter(heading).get().at(0) > 0 and it.body != [Bibliography]
+      counter(heading).get().at(0) > 0
+      and it.body not in
+      (
+        [Bibliography],
+        [Overview of Used Tools],
+        [Declaration of Academic Integrity]
+      )
     ) {
+      if numbering != none {
       counter(heading).display()
       if (it.depth == 1) [
-        #text(silver)[ | ]
+        #h(0.3em)
+        #box(
+          fill: luma(75%),
+          width: 1.5pt,
+          height: .7em,
+          outset: (y: .5em),
+        )
+        #h(0.3em)
       ]
-      // [
-      //   #h(0.5em)
-      //   #box(
-      //     fill: luma(70%),
-      //     width: 1.2pt,
-      //     height: 1.5em,
-      //     // place(span: "parent"),
-      //   )
-      //   #h(0.5em)
-      // ]
+      }
     }
     #text(it.body)
+    #v(1em)
   ]
 
   show heading.where(level: 1): it => {
@@ -130,7 +168,9 @@
       email: email,
       matric: matric,
       lang: lang,
-      advisor: advisor,
+      supervisor: supervisor,
+      first-assesor: first-assesor,
+      second-assesor: second-assesor,
     )
   }
 
@@ -160,7 +200,7 @@
 
   // Display the abstract if one is given
   if abstract != none {
-    set page(numbering: none)
+    set page(numbering: "I")
     show: abstract
     pagebreak()
   }
@@ -170,14 +210,15 @@
   // Grey bar left of quotes
   set quote(block: true)
   show quote.where(block: true): block.with(
-    inset: (top: .5em, bottom: .5em),
+    inset: (y: .5em),
     stroke: (left: 2pt + silver, rest: none),
   )
 
   if draw-outline {
     // Outline
     set page(numbering: "I")
-    outline(indent: auto)
+    show outline.entry: outrageous.show-entry
+    outline()
     pagebreak()
   }
 

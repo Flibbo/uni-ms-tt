@@ -1,15 +1,23 @@
 #import "common.typ": document_setup
 
+// #let title-state = state("title", "")
+
 #let bachelor(
   draw-title-page: true,
   draw-outline: true,
   draw-header: false,
   title: [Title \ optionally multi-rowed],
-  type: [#smallcaps[Bachelor's Thesis] \ in partial fulfilment of the requirements for the degree of \ #smallcaps[Bachelor of Science]],
+  type: [
+    #smallcaps[Bachelor's Thesis] \
+    in partial fulfilment of the requirements for the degree of \
+    #smallcaps[Bachelor of Science]
+  ],
   author: "Magges Mustermensch",
   email: none,
   matric: none,
-  advisor: none,
+  supervisor: none,
+  first-assesor: none,
+  second-assesor: none,
   lang: "en",
   abstract: none,
   doc,
@@ -23,7 +31,9 @@
     author: author,
     email: email,
     matric: matric,
-    advisor: advisor,
+    supervisor: supervisor,
+    first-assesor: first-assesor,
+    second-assesor: second-assesor,
     lang: lang,
     abstract: abstract,
   )
@@ -36,11 +46,17 @@
   draw-outline: true,
   draw-header: false,
   title: [Title \ optionally multi-rowed],
-  type: [#smallcaps[Master's Thesis] \ in partial fulfilment of the requirements for the degree of \ #smallcaps[Master of Science]],
+  type: [
+    #smallcaps[Master's Thesis] \
+    in partial fulfilment of the requirements for the degree of \
+    #smallcaps[Master of Science]
+  ],
   author: "Magges Mustermensch",
   email: none,
   matric: none,
-  advisor: none,
+  supervisor: none,
+  first-assesor: none,
+  second-assesor: none,
   lang: "en",
   doc,
 ) = {
@@ -53,7 +69,9 @@
     author: author,
     email: email,
     matric: matric,
-    advisor: advisor,
+    supervisor: supervisor,
+    first-assesor: first-assesor,
+    second-assesor: second-assesor,
     lang: lang,
   )
 
