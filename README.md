@@ -16,7 +16,7 @@ Until I feel confident a first version can be added to the official repo, you ca
 
 ```bash
 cd ~/.local/share/typst/packages/local/
-git clone https://github.com/Flibbo/uni-ms-tt.git
+git clone https://github.com/Flibbo/uni-ms-tt.git uni-ms-thesis
 ```
 
 # Using the template
