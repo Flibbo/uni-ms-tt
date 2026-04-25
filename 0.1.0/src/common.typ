@@ -28,7 +28,7 @@
     paper: "a4",
     margin: (bottom: 4cm, rest: 3cm),
     numbering: "I",  // For preamble - changed at main section
-    footer: 
+    footer: fancy-footer
   )
 
   set text(
