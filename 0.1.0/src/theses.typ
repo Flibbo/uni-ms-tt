@@ -1,7 +1,5 @@
 #import "common.typ": document_setup
 
-// #let title-state = state("title", "")
-
 #let bachelor(
   draw-title-page: true,
   draw-outline: true,
