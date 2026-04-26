@@ -2,11 +2,16 @@
 #import "styles.typ": *
 #import "title.typ": title-page
 
+/// QOL function to create a simple divider line
 #let hline = {
   line(start: (20%, 0%), end: (80%, 0%))
 }
 
+#let location-date = [
+  Münster, #datetime.today().display("[month repr:long] [day], [year]")
+]
 
+/// Here all parts and styles get combined as well as infused with the given parameters
 #let document_setup(
   draw-title-page: false,
   draw-outline: false,
@@ -65,6 +70,7 @@
       supervisor: supervisor,
       first-assesor: first-assesor,
       second-assesor: second-assesor,
+      location-date: location-date,
     )
   }
 
@@ -81,8 +87,7 @@
 
   // Display the abstract if one is given
   if abstract != none {
-    align(horizon)[
-    #show: abstract]
+    align(horizon)[#show: abstract]
     pagebreak()
   }
 
@@ -91,6 +96,9 @@
     show outline.entry: outrageous.show-entry.with(
       vspace: (2em,1em),
       gap: (1em,),
+      page-transform: (level, page) => {
+        [#text(font: "FreeMono", page)]
+      },
     )
     outline()
     pagebreak()

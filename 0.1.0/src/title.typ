@@ -9,6 +9,7 @@
   supervisor: none,
   first-assesor: none,
   second-assesor: none,
+  location-date: none,
 ) = {
   // No page number on title
   set page(
@@ -86,7 +87,7 @@
       assessor(second-assesor)
     }
   }
-  Münster, #datetime.today().display("[month repr:long] [day], [year]")
+  #location-date
   ]
   pagebreak()
   // Reactivate page numbers
