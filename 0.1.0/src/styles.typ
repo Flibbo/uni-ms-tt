@@ -1,7 +1,7 @@
 //// Fonts ////
 
-// [XCharter](https://ctan.org/pkg/xcharter)
 // For accessibility reasons we used the open font "New Computer Modern[ Sans]" included in typst for this document as fallback.
+
 // To be more in line with the official CI of the University of Münster the fonts could be changed to "FF Meta" for headlines and "Adobe Garamond" for text blocks. See: https://www.jura.uni-muenster.de/de/fakultaet/iv-versorgungseinheit/it-services-und-beratung/kommunikationsvorlagen/
 // Free alternatives to those are "Fira Sans" and "EB Garamond"
 
@@ -15,11 +15,32 @@
 
 /// Collection of fonts for text blocks\
 /// Applied also on bold parts of title page
+/// 
+/// [XCharter](https://ctan.org/pkg/xcharter)
 #let text-fonts = (
   // "EB Garamond",
   "XCharter",  // Used in AIS Template
   "New Computer Modern"
 )
+
+//// Text elements ////
+
+/// Sets quotes to a block with a grey bar on the left side
+/// and a light grey background
+///
+/// - doc (content): Document content
+/// -> content
+#let fancy-quotes(doc) = {
+  // TODO: Force block should probably be removed at some point
+  set quote(block: true)
+  show quote.where(block: true): block.with(
+    inset: (y: 1em),
+    spacing: auto,
+    stroke: (left: 2pt + silver),
+    fill: luma(240),
+  )
+  doc
+}
 
 //// Header and Footer ////
 
@@ -33,13 +54,36 @@
   context {
     let (num,) = counter(page).get()
     let align_side = if calc.even(num) { left } else { right }
-    
     let pattern = here().page-numbering()
+
     if pattern != none {
       align(align_side)[
-        #text(fill: luma(127), counter(page).display(pattern))
+        #text(
+          font: "New Computer Modern Mono",
+          fill: luma(75%),
+          counter(page).display(pattern)
+        )
       ]
     }
+
+  }
+}
+
+/// Sets page numbers to hexadecimal
+#let hexa-counter(hex, doc) = {
+  if hex {
+    set page(numbering: n => {
+      // Convert the decimal number 'n' to a hexadecimal string
+      let hex_str = str(n, base: 16)
+      if hex_str.len() == 1 {
+        hex_str = "0" + hex_str
+      }
+      // Convert to uppercase for standard reading
+      "0x" + upper(hex_str)
+    })
+    doc
+  } else {
+    doc
   }
 }
 
@@ -81,8 +125,17 @@
 /// - doc (content): Document content
 /// -> content
 #let fancy-headings(doc) = {
-  // show <nonumber>: set heading(numbering: none)
   show: set-heading-scale
+  // Space between neighbouring elements (number, [bar,] title)
+  let gap = .5em
+  // The grey divider between number and text of level 1 headings
+  let grey-bar = box(
+    fill: luma(75%),
+    width: 1.5pt,
+    height: .6em,
+    outset: (y: .4em),
+  )
+
   show heading: it => block(
     sticky: true,
     above: 3.5em,
@@ -92,40 +145,33 @@
       font: header-fonts,
       weight: "extrabold",
     )
-    // To avoid numbering at abstract, TOC and supplements
-    if (
-      counter(heading).get().at(0) > 0
-      and
-      it.body not in
-      (
-        [Bibliography],
-        [Overview of Used Tools],
-        [Declaration of Academic Integrity],
-      )
-    ) {
-      if numbering != none {
-        // More headspace for chapters
-        if (it.depth == 1) {
-          v(3.5em)
-        }
-        // The number
-        counter(heading).display()
-        // Grey line in between the numbering and the heading
-        if (it.depth == 1) {
-          h(0.6em)
-          box(
-            fill: luma(75%),
-            width: 1.5pt,
-            height: .7em,
-            outset: (y: .5em),
-          )
-          h(0.2em)
-        }
-        h(0.4em)
+    // Custom section numbers
+    if it.numbering != none {
+      // More headspace for chapters
+      if (it.level == 1) { v(3.5em) }
+      // The number
+      counter(heading).display()
+      // Grey line in between the numbering and the heading
+      if (it.level == 1) {
+        h(gap)
+        grey-bar
       }
+      h(gap)
     }
     text(it.body)
   }]
+
+  doc
+}
+
+//// Figures (Images, Tables, Code) ////
+
+/// Gives tables a bold first line
+///
+/// - doc (content): Document content
+/// -> content
+#let fancy-tables(doc) = {
+  show table.cell.where(y: 0): strong
   doc
 }
 
@@ -142,15 +188,13 @@
   // Numbering
   show figure: set figure(numbering: (..nums) => {
     let chp = counter(heading).get().at(0)
+    let fig = counter(figure).get().at(0)
     // Display as chapter.figure
-    str(chp) + "." + str(nums.pos().at(0))
+    str(chp) + "." + str(fig)
   })
-  // Figure number reset in each chapter
-  show heading: it => {
-    // Only reset if it is a level 1 heading (chapter)
-    if it.depth == 1 {
-      counter(figure).update(0)
-    }
+  // Add figure number reset to top level heading
+  show heading.where(level: 1): it => {
+    counter(figure).update(0)
     it
   }
   // Caption styling
@@ -162,22 +206,8 @@
       align(left, box(it.body))
     )
   }
+  show figure: set block(spacing: 2em)
+  show: fancy-tables
   doc
 }
 
-/// Sets quotes to a block with a grey bar on the left side
-/// and a light grey background
-///
-/// - doc (content): Document content
-/// -> content
-#let fancy-quotes(doc) = {
-  // Force block should probably be removed at some point
-  set quote(block: true)
-  show quote.where(block: true): block.with(
-    inset: (y: 1em),
-    spacing: auto,
-    stroke: (left: 2pt + silver),
-    fill: luma(240),
-  )
-  doc
-}
