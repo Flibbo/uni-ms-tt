@@ -7,7 +7,11 @@
   doc,
 ) = {
   show: hexa-counter.with(hex)
+  set heading(numbering: none, outlined: true)
+  // So figures can get their own chapter number
+  counter(heading).step()
 
+  // Appendix content
   declaration(thesis-title)
   include "used-tools-hints.typ"
   include "used-tools.typ"

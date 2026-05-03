@@ -223,11 +223,15 @@
   // Caption styling
   show figure.caption: it => context {
     set text(size: .9em)
-    grid(
-      columns: (auto, 1fr),
-      [*#it.supplement~#it.counter.display()#it.separator*],
-      align(left, box(it.body))
-    )
+    if it.numbering == none {
+      box(width: 100%, align(left, it.body))
+    } else {
+      grid(
+        columns: (auto, 1fr),
+        [*#it.supplement~#it.counter.display()#it.separator*],
+        align(left, box(it.body))
+      )
+    }
   }
   // Automatic placement
   let space = 2em
