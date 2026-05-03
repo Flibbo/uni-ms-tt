@@ -19,7 +19,8 @@
 
   // Centered block
   align(top + center)[#{
-    v(.5cm)
+    set v(weak: true)
+    v(.5cm, weak: false)
     image("Logo_Universität_Münster.svg", width: 6cm)
     v(6em)
     text(
@@ -28,19 +29,19 @@
       stretch: 50%,
       title
     )
-    v(4em)
+    v(6em)
     show smallcaps: set text(size: 1.2em)  // large
     text(type)
     v(5em)
     "Submitted by:"
     // linebreak()
-    v(.2em)
+    v(2em)
     text(
       size: 1.44em,  // Large
       weight: "bold",
       author
     )
-    v(1.4em)
+    v(4em)
     if matric != none {
       if (lang == "de") {
         "Matrikelnummer: "
