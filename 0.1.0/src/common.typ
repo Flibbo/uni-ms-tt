@@ -11,12 +11,22 @@
   Münster, #datetime.today().display("[month repr:long] [day], [year]")
 ]
 
+#let code-header(title) = {
+  box(
+    width: 100% - 1em,
+    fill: silver,
+    outset: .5em,
+    radius: (top: .5em),
+    raw(title.text),
+  )
+}
+
 /// Here all parts and styles get combined as well as infused with the given parameters
-#let document_setup(
+#let document-setup(
   draw-title-page: false,
   draw-outline: false,
   draw-header: false,
-  title: [Title \ optionally multi-rowed],
+  title: none,
   type: "Document",
   author: "Magges Mustermensch",
   email: none,
@@ -46,14 +56,31 @@
   // Double spacing paragraphs
   set par(
     justify: true,
-    leading: 1em // .65em is standard, so this should be onehalf
+    leading: 1em, // .65em is standard, so this should be onehalf
+    spacing: 2em,
   )
+
+  // Bullet lists
+  set list(
+    tight: false,
+    indent: 1.5em,
+    spacing: 1.8em,
+  )
+  // This fixes some weird collapsing of space
+  // above lists between it and preceeding par
+  show list: it => block(above: 2.5em, below: 2.5em, it)
 
   // Apply styles
   show: fancy-headings
   show: openright
   show: fancy-figures
   show: fancy-quotes
+
+  // show chapter on equation numbering
+  // https://forum.typst.app/t/figure-and-table-captions-with-chapter-number/1520/7
+  set math.equation(numbering: (..num) =>
+    numbering("(1.1)", counter(heading).get().first(), num.pos().first())
+  )
 
   //// Front matter ////
   set heading(numbering: none)
@@ -75,15 +102,7 @@
   }
 
   // Document settings // TODO: create fancy headers
-  // set page(
-  //   header: if draw-header {
-  //     // Header
-  //     align(
-  //       horizon,
-  //       text(.5em)[#title #h(1fr) #author],
-  //     )
-  //   } else { none },
-  // )
+  if draw-header { fancy-header }
 
   // Display the abstract if one is given
   if abstract != none {
@@ -94,20 +113,24 @@
   // Outline
   if draw-outline {
     show outline.entry: outrageous.show-entry.with(
-      vspace: (2em,1em),
+      vspace: (2em, 1em),
       gap: (1em,),
       page-transform: (level, page) => {
         [#text(font: "FreeMono", page)]
       },
     )
-    outline()
+    outline(depth: 2)
     pagebreak()
   }
 
   //// Main part ////
 
   // Start regular page counter with content
-  set heading(numbering: "1.1.1")
+  set heading(numbering: (..levels) => {
+    if levels.pos().len() <= 2 {
+      numbering("1.1", ..levels)
+    }
+  })
   set page(numbering: "1")
   counter(page).update(1)
 
