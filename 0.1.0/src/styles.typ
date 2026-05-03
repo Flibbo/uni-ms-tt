@@ -46,6 +46,12 @@
 
 /// TODO
 #let fancy-header = {
+  // set page(
+  //   header: align(
+  //     horizon,
+  //     text(.5em)[#title #h(1fr) #author],
+  //   )
+  // )
   // TODO
 }
 
@@ -59,7 +65,7 @@
     if pattern != none {
       align(align_side)[
         #text(
-          font: "New Computer Modern Mono",
+          font: "FreeMono",
           fill: luma(75%),
           counter(page).display(pattern)
         )
@@ -156,7 +162,8 @@
         h(gap)
         grey-bar
       }
-      h(gap)
+      // No padding for unnumbered headings
+      if (it.level < 3) { h(gap) }
     }
     text(it.body)
   }]
@@ -166,12 +173,28 @@
 
 //// Figures (Images, Tables, Code) ////
 
-/// Gives tables a bold first line
+/// Table configurations
+/// 
+/// - Gives tables a bold first line
+/// - Caption is set above
 ///
 /// - doc (content): Document content
 /// -> content
 #let fancy-tables(doc) = {
-  show table.cell.where(y: 0): strong
+  // Table cations above
+  show figure.where(
+    kind: table
+  ): set figure.caption(position: top)
+  // Table presets
+  show figure: set table(
+    stroke: (_, y) => (
+      top: if y > 1 {.5pt} else {1pt},
+      bottom: 1pt,
+    ),
+    inset: .6em,
+  )
+  // // Bold first line
+  // show table.cell.where(y: 0): strong
   doc
 }
 
@@ -206,7 +229,12 @@
       align(left, box(it.body))
     )
   }
-  show figure: set block(spacing: 2em)
+  // Automatic placement
+  let space = 2em
+  show figure: set figure(placement: auto)
+  show figure: set place(clearance: space)
+  // If in-flow (placement: none) ensure distance
+  show figure: set block(spacing: space)
   show: fancy-tables
   doc
 }
