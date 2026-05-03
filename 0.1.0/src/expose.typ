@@ -1,4 +1,4 @@
-#import "common.typ": document_setup
+#import "common.typ": document-setup
 
 #let expose(
   draw-title-page: false,
@@ -13,7 +13,7 @@
   lang: "en",
   doc,
 ) = {
-  show: document_setup.with(
+  show: document-setup.with(
     draw-title-page: draw-title-page,
     draw-outline: draw-outline,
     draw-header: draw-header,

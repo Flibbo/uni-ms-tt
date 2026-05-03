@@ -1,4 +1,4 @@
-#import "common.typ": document_setup
+#import "common.typ": document-setup
 
 #let bachelor(
   draw-title-page: true,
@@ -20,7 +20,7 @@
   abstract: none,
   doc,
 ) = {
-  show: document_setup.with(
+  show: document-setup.with(
     draw-title-page: draw-title-page,
     draw-outline: draw-outline,
     draw-header: draw-header,
@@ -58,7 +58,7 @@
   lang: "en",
   doc,
 ) = {
-  show: document_setup.with(
+  show: document-setup.with(
     draw-title-page: draw-title-page,
     draw-outline: draw-outline,
     draw-header: draw-header,
