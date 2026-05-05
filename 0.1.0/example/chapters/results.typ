@@ -80,7 +80,13 @@ In the following, I just give briefly examples for results (all taken from ):  /
 #quote(attribution: link("https://paperpile.com/g/thesis-structure/#num-5-results", "paperpile"))[
   *Results*
 
-  #block(stroke: green, inset: 1em, width: 100%)[*Tip:* Use graphs and tables, where appropriate, to visualize your results.]
+  #block(
+    stroke: green,
+    inset: 1em,
+    width: 100%,
+  )[
+    *Tip:* Use graphs and tables, where appropriate, to visualize your results.
+  ]
 
   The results chapter outlines what you found out in relation to your research questions or hypotheses. It generally contains the facts of your research and does not include a lot of analysis, because that happens mostly in the discussion chapter.
 
