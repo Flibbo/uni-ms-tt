@@ -2,15 +2,53 @@
 #import "styles.typ": *
 #import "title.typ": title-page
 
-/// QOL function to create a simple divider line
+// QOL function to create a simple divider line
 #let hline = {
   line(start: (20%, 0%), end: (80%, 0%))
 }
 
+// Creates the current date
 #let location-date = [
   Münster, #datetime.today().display("[month repr:long] [day], [year]")
 ]
 
+/// Creates a partial display of the given image.
+/// 
+/// Zoom into the image by modifying the image width parameter.
+///
+/// - img-content (image): The image to display from.
+/// - width (): Width of the cut-out.
+/// - height (): Height of the cut-out.
+/// - offset (): `dx` and `dy` offsets of the image.
+/// -> box (partial image)
+#let cut-out(
+  img-content,
+  width: 100%,
+  height: 20%,
+  zoom: 100%,
+  offset: (:),
+  ) = {
+    // handle optional offsets
+    let dx = offset.at("dx", default: 0pt)
+    let dy = offset.at("dy", default: 0pt)
+
+    box(
+      width: width,
+      height: height,
+      clip: true,
+    )[
+      #place(dx: dx, dy: dy)[
+        #scale(zoom)[#img-content]
+      ]
+    ]
+  }
+)
+
+
+/// Creates a nice headerboy to encase a listing.
+///
+/// - title (str): The title to be displayed. Usually a filename.
+/// -> box
 #let code-header(title) = {
   box(
     width: 100% - 1em,

@@ -7,5 +7,6 @@
 #import "common.typ": (
   hline,
   location-date,
-  code-header
+  code-header,
+  cut-out,
   )
