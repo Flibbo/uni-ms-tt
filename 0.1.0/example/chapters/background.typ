@@ -44,3 +44,18 @@ In a second step, it should provide more detail only in those areas that directl
 
 - What are the key terms, concepts, and problems addressed by the authors?
 - Position the source already in relation to your specific topic?
+
+#quote(
+  attribution: link("https://paperpile.com/g/thesis-structure/#num-3-literature-review", "paperpile")
+)[
+  *Literature review*
+
+  A #link("https://paperpile.com/g/what-is-a-literature-review/", "literature review") is often part of the introduction, but it can be a separate section. It is an evaluation of previous research on the topic showing that there are gaps that your research will attempt to fill. A few tips for your literature review:
+
+  -  Use a wide array of sources
+  -  Show both sides of the coin
+  -  Make sure to cover the classics in your field
+  -  Present everything in a clear and structured manner
+
+  For more insights on lit reviews, take a look at our guide on #link("https://paperpile.com/g/thesis-literature-review/", "how to write a literature review").
+]
