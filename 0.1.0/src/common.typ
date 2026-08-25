@@ -27,6 +27,7 @@
   height: 20%,
   zoom: 100%,
   offset: (:),
+  border: false,
   ) = {
     // handle optional offsets
     let dx = offset.at("dx", default: 0pt)
@@ -36,6 +37,7 @@
       width: width,
       height: height,
       clip: true,
+      stroke: if border {.5pt} else {none},
     )[
       #place(dx: dx, dy: dy)[
         #scale(zoom)[#img-content]
@@ -50,10 +52,11 @@
 /// - title (str): The title to be displayed. Usually a filename.
 /// -> box
 #let code-header(title) = {
-  box(
-    width: 100% - 1em,
+  block(
+    width: 100%,
     fill: silver,
-    outset: .5em,
+    inset: .5em,
+    spacing: .5em,
     radius: (top: .5em),
     raw(title.text),
   )
@@ -158,7 +161,7 @@
       },
     )
     outline(depth: 2)
-    pagebreak()
+    pagebreak(to: "odd")
   }
 
   //// Main part ////

@@ -104,6 +104,7 @@
   // show heading.where(level: 2): set text(size: 1.57em)
   show heading.where(level: 1): set text(size: 1.31em)
   show heading.where(level: 2): set text(size: 1.09em)
+  show heading.where(level: 4): set text(style: "italic")
   doc
 }
 
@@ -235,7 +236,7 @@
   }
   // Automatic placement
   let space = 2em
-  show figure: set figure(placement: auto)
+  // show figure: set figure(placement: auto)  // known issue: linking stops working and footnotes can be misplaced
   show figure: set place(clearance: space)
   // If in-flow (placement: none) ensure distance
   show figure: set block(spacing: space)
